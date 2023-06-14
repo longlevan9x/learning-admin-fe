@@ -27,10 +27,10 @@ export class CategoryComponent implements OnInit {
 
     modalRef.afterClose.subscribe((result) => {
       if (result) {
-        if (!result.id) {
-          this.categoryService.create(category).subscribe((result1) => {
+        if (!result._id) {
+          this.categoryService.create(result).subscribe((result1: CategoryModel) => {
             console.log(result1)
-            this.categories.push(result);
+            this.categories.push(result1);
           })
         } else {
           // update book
@@ -43,8 +43,19 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fetchList();
+  }
+
+  fetchList() {
     this.categoryService.findAll().subscribe((categories) => {
       this.categories = categories;
-    })
+    });
+  }
+
+  remove(id: string) {
+    this.categoryService.remove(id).subscribe(result => {
+      console.log(result);
+      this.fetchList();
+    });
   }
 }

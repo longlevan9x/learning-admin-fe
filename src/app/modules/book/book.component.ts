@@ -3,6 +3,8 @@ import {NzModalService} from "ng-zorro-antd/modal";
 import {BookFormModalComponent} from "./book-form-modal/book-form-modal.component";
 import {BookService} from "../../services/book.service";
 import {BookModel} from "../../models/book.model";
+import {CategoryService} from "../../services/category.service";
+import {CategoryModel} from "../../models/category.model";
 
 @Component({
   selector: 'app-book',
@@ -11,14 +13,17 @@ import {BookModel} from "../../models/book.model";
 })
 export class BookComponent implements OnInit {
   books: BookModel[] = [];
+  categories: CategoryModel[] = [];
 
-  constructor(private modalService: NzModalService, private bookService: BookService) {
+  constructor(private modalService: NzModalService,
+              private bookService: BookService,
+              private categoryService: CategoryService,
+  ) {
   }
 
   ngOnInit() {
-    this.bookService.findAll().subscribe((books: BookModel[]) => {
-      this.books = books;
-    });
+    this.fetchList();
+    this.fetchListCategory();
   }
 
   openModal(book?: any): void {
@@ -27,7 +32,7 @@ export class BookComponent implements OnInit {
       nzContent: BookFormModalComponent,
       nzFooter: null,
       nzData: {
-        book: book || {_id: '', name: ""}
+        book: book || {}
       },
     });
 
@@ -40,11 +45,34 @@ export class BookComponent implements OnInit {
           });
         } else {
           // update book
-          this.bookService.update(book._id , book).subscribe(result1 => {
+          this.bookService.update(book._id, book).subscribe(result1 => {
             console.log(result1);
           });
         }
       }
     });
+  }
+
+  fetchListCategory() {
+    this.categoryService.findAll().subscribe((result) => {
+      this.categories = result;
+    });
+  }
+
+  fetchList() {
+    this.bookService.findAll().subscribe((books: BookModel[]) => {
+      this.books = books;
+    });
+  }
+
+  remove(id: string) {
+    this.bookService.remove(id).subscribe(result => {
+      console.log(result);
+      this.fetchList();
+    });
+  }
+
+  getCategory(id: string) {
+    return this.categories.find(c => c._id === id);
   }
 }

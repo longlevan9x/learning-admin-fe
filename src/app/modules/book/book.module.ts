@@ -13,12 +13,12 @@ import {FormsModule} from "@angular/forms";
     BookComponent,
     BookFormModalComponent,
   ],
-  imports: [
-    CommonModule,
-    BookRoutingModule,
-    NgZorroAntdModule,
-    IconsProviderModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        BookRoutingModule,
+        NgZorroAntdModule,
+        IconsProviderModule,
+        FormsModule
+    ]
 })
 export class BookModule { }

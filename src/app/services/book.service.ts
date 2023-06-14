@@ -22,4 +22,8 @@ export class BookService {
   update(id: string, book: any) {
     return this.http.put(environment.apiUrl + '/books/' + id, book);
   }
+
+  remove(id: string) {
+    return this.http.delete(environment.apiUrl + '/books/' + id);
+  }
 }

@@ -16,11 +16,15 @@ export class CategoryService {
     return this.http.get(environment.apiUrl + '/categories');
   }
 
-  create(category: any) {
+  create(category: any): Observable<any> {
     return this.http.post(environment.apiUrl + '/categories', category);
   }
 
   update(id: string, category: any) {
     return this.http.put(environment.apiUrl + '/categories/' + id, category);
+  }
+
+  remove(id: string) {
+    return this.http.delete(environment.apiUrl + '/categories/' + id);
   }
 }

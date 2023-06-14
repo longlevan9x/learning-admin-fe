@@ -7,6 +7,7 @@ import { LessonFormModalComponent } from './lesson-form-modal/lesson-form-modal.
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {FormsModule} from "@angular/forms";
+import {NzSelectModule} from "ng-zorro-antd/select";
 
 
 @NgModule({
@@ -14,12 +15,13 @@ import {FormsModule} from "@angular/forms";
     LessonComponent,
     LessonFormModalComponent
   ],
-  imports: [
-    CommonModule,
-    LessonRoutingModule,
-    NzIconModule,
-    NzTableModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        LessonRoutingModule,
+        NzIconModule,
+        NzTableModule,
+        FormsModule,
+        NzSelectModule
+    ]
 })
 export class LessonModule { }

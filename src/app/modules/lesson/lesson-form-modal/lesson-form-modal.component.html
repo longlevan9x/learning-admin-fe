@@ -5,17 +5,29 @@
     <div class="mb-4">
       <label for="name" class="block text-sm font-medium text-gray-700">Tên</label>
       <input type="text" id="name" name="name"
-             class="mt-1 p-3 block w-full shadow-sm sm:text-sm border-gray-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+             class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
              placeholder="Nhập tên" [(ngModel)]="nzModalData.lesson.name" required>
     </div>
     <div class="w-full">
       <label for="book" class="block text-sm font-medium text-gray-700">Book</label>
       <div class="mt-2">
-        <nz-select nzAllowClear nzPlaceHolder="Select a person" id="book"
+        <nz-select nzAllowClear nzPlaceHolder="Select a book" id="book"
                    [(ngModel)]="nzModalData.lesson.bookId"
                    class="w-full mb-5"
                    [ngModelOptions]="{standalone: true}">
           <nz-option [nzLabel]="book.name" [nzValue]="book._id" *ngFor="let book of books"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div class="w-full">
+      <label for="section" class="block text-sm font-medium text-gray-700">Section</label>
+      <div class="mt-2">
+        <nz-select nzMode="multiple" nzAllowClear nzPlaceHolder="Select a section" id="section"
+                   [(ngModel)]="nzModalData.lesson.sections"
+                   class="w-full mb-5"
+                   [ngModelOptions]="{standalone: true}">
+          <nz-option [nzLabel]="section" [nzValue]="section" *ngFor="let section of sections"></nz-option>
         </nz-select>
       </div>
     </div>

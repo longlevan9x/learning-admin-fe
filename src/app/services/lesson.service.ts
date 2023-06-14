@@ -12,18 +12,22 @@ export class LessonService {
 
 
   findAll(): Observable<any> {
-    return this.http.get(environment.apiUrl + '/lesson');
+    return this.http.get(environment.apiUrl + '/lessons');
   }
 
   create(body: any): Observable<any> {
-    return this.http.post(environment.apiUrl + '/lesson', body);
+    return this.http.post(environment.apiUrl + '/lessons', body);
   }
 
   update(id: string, body: any) {
-    return this.http.put(environment.apiUrl + '/lesson/' + id, body);
+    return this.http.put(environment.apiUrl + '/lessons/' + id, body);
   }
 
   remove(id: string) {
-    return this.http.delete(environment.apiUrl + '/lesson/' + id);
+    return this.http.delete(environment.apiUrl + '/lessons/' + id);
+  }
+
+  findAllSection() {
+    return this.http.get(environment.apiUrl + '/lessons/sections');
   }
 }

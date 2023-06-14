@@ -62,12 +62,19 @@ export class LessonComponent implements OnInit {
     });
   }
 
-  getBook(id: string) {
+  fetchListSection() {
+    this.lessonService.findAllSection().subscribe(results => {
+      console.log(results);
+    })
+  }
+
+  getBook(id?: string) {
     return this.books.find(x => x._id === id);
   }
 
   ngOnInit(): void {
     this.fetchList();
     this.fetchListBook();
+    this.fetchListSection();
   }
 }

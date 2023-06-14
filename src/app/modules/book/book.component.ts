@@ -1,19 +1,24 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NzModalService} from "ng-zorro-antd/modal";
 import {BookFormModalComponent} from "./book-form-modal/book-form-modal.component";
+import {BookService} from "../../services/book.service";
+import {BookModel} from "../../models/book.model";
 
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss']
 })
-export class BookComponent {
-  books = [
-    {id: 1, name: 'Mimikara', categoryId: "123"},
-    {id: 2, name: 'Soumatome', categoryId: "123"},
-  ];
+export class BookComponent implements OnInit {
+  books: BookModel[] = [];
 
-  constructor(private modalService: NzModalService) {
+  constructor(private modalService: NzModalService, private bookService: BookService) {
+  }
+
+  ngOnInit() {
+    this.bookService.findAll().subscribe((books: BookModel[]) => {
+      this.books = books;
+    });
   }
 
   openModal(book?: any): void {
@@ -22,18 +27,22 @@ export class BookComponent {
       nzContent: BookFormModalComponent,
       nzFooter: null,
       nzData: {
-        book: book || {id: '', name: ""}
+        book: book || {_id: '', name: ""}
       },
     });
 
     modalRef.afterClose.subscribe((result) => {
       if (result) {
-        if (!result.id) {
-          result.id = this.books.length + 1;
-          result.categoryId = '123';
-          this.books.push(result);
+        if (!result._id) {
+          this.bookService.create(result).subscribe(result1 => {
+            console.log(result1)
+            this.books.push(result);
+          });
         } else {
           // update book
+          this.bookService.update(book._id , book).subscribe(result1 => {
+            console.log(result1);
+          });
         }
       }
     });

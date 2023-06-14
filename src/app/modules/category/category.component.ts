@@ -1,19 +1,18 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NzModalService} from "ng-zorro-antd/modal";
 import {CategoryFormModalComponent} from "./category-form-modal/category-form-modal.component";
+import {CategoryModel} from "../../models/category.model";
+import {CategoryService} from "../../services/category.service";
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent {
-  categories = [
-    {id: 1, name: 'Minnanonihong', parentId: "123"},
-    {id: 2, name: 'N2', parentId: "123"},
-  ];
+export class CategoryComponent implements OnInit {
+  categories: CategoryModel[] = [];
 
-  constructor(private modalService: NzModalService) {
+  constructor(private modalService: NzModalService, private categoryService: CategoryService) {
   }
 
   openModal(category?: any): void {
@@ -29,13 +28,23 @@ export class CategoryComponent {
     modalRef.afterClose.subscribe((result) => {
       if (result) {
         if (!result.id) {
-          result.id = this.categories.length + 1;
-          result.parentId = '123';
-          this.categories.push(result);
+          this.categoryService.create(category).subscribe((result1) => {
+            console.log(result1)
+            this.categories.push(result);
+          })
         } else {
           // update book
+          this.categoryService.update(category._id, category).subscribe(result1 => {
+            console.log(result1);
+          });
         }
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.categoryService.findAll().subscribe((categories) => {
+      this.categories = categories;
+    })
   }
 }

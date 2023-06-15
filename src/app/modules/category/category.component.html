@@ -3,7 +3,7 @@
   </button>
 </div>
 
-<table class="min-w-full divide-y divide-gray-200">
+<table class="min-w-full  divide-y divide-gray-200">
   <thead>
   <tr>
     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">STT</th>
@@ -16,7 +16,7 @@
   <tr *ngFor="let category of categories;let i = index;">
     <td class="px-6 py-4 whitespace-nowrap">{{i + 1}}</td>
     <td class="px-6 py-4 whitespace-nowrap">{{category.name}}</td>
-    <td class="px-6 py-4 whitespace-nowrap">{{category.parentId}}</td>
+    <td class="px-6 py-4 whitespace-nowrap">{{getCategoryParent(category.parentId)?.name}}</td>
     <td class="px-6 py-4 whitespace-nowrap flex">
       <button class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1"
               (click)="openModal(category)">

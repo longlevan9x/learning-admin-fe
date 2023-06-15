@@ -58,4 +58,8 @@ export class CategoryComponent implements OnInit {
       this.fetchList();
     });
   }
+
+  getCategoryParent(id?: string) {
+    return this.categories.find(c => c._id === id);
+  }
 }

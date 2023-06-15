@@ -7,6 +7,7 @@ import { CategoryFormModalComponent } from './category-form-modal/category-form-
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {FormsModule} from "@angular/forms";
+import {NzSelectModule} from "ng-zorro-antd/select";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {FormsModule} from "@angular/forms";
     CategoryRoutingModule,
     NzIconModule,
     NzTableModule,
-    FormsModule
+    FormsModule,
+    NzSelectModule
   ]
 })
 export class CategoryModule { }

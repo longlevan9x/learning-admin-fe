@@ -1,0 +1,29 @@
+<div class="flex justify-end mb-4">
+
+</div>
+
+<table class="min-w-full divide-y divide-gray-200">
+  <thead>
+  <tr>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">STT</th>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vocabulary</th>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kanji</th>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vietnam sound</th>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Media Url</th>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mean</th>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+  </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200">
+  <tr *ngFor="let vocabulary of vocabularies;let i = index">
+    <td class="px-6 py-4 whitespace-nowrap">{{i+1}}</td>
+    <td class="px-6 py-4 whitespace-nowrap">{{vocabulary.vocabulary}}</td>
+    <td class="px-6 py-4 whitespace-nowrap">{{vocabulary.kanji}}</td>
+    <td class="px-6 py-4 whitespace-nowrap">{{vocabulary.vietnam_sound}}</td>
+    <td class="px-6 py-4 whitespace-nowrap">{{vocabulary.mediaUrl}}</td>
+    <td class="px-6 py-4 whitespace-nowrap">{{vocabulary.mean}}</td>
+    <td class="px-6 py-4 whitespace-nowrap flex">
+    </td>
+  </tr>
+  </tbody>
+</table>

@@ -18,6 +18,10 @@
     <td class="px-6 py-4 whitespace-nowrap">{{category.name}}</td>
     <td class="px-6 py-4 whitespace-nowrap">{{getCategoryParent(category.parentId)?.name}}</td>
     <td class="px-6 py-4 whitespace-nowrap flex">
+      <button class="flex items-center bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-1"
+              (click)="cloneLesson(category._id)">
+        <i nz-icon nzType="edit" class="mr-2"></i> Clone Lesson
+      </button>
       <button class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1"
               (click)="openModal(category)">
         <i nz-icon nzType="edit" class="mr-2"></i> Chỉnh sửa

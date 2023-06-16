@@ -5,6 +5,9 @@ import {LessonModel} from "../../models/lesson.model";
 import {LessonService} from "../../services/lesson.service";
 import {BookService} from "../../services/book.service";
 import {BookModel} from "../../models/book.model";
+import {CategoryService} from "../../services/category.service";
+import {CategoryModel} from "../../models/category.model";
+import {VocabularyService} from "../../services/vocabulary.service";
 
 @Component({
   selector: 'app-lesson',
@@ -14,9 +17,13 @@ import {BookModel} from "../../models/book.model";
 export class LessonComponent implements OnInit {
   lessons: LessonModel[] = [];
   books: BookModel[] = [];
+  categories: CategoryModel[] = [];
 
   constructor(private modalService: NzModalService, private lessonService: LessonService,
-              private bookService: BookService) {
+              private bookService: BookService,
+              private categoryService: CategoryService,
+              private vocabularyService: VocabularyService,
+  ) {
   }
 
   openModal(lesson?: any): void {
@@ -55,7 +62,7 @@ export class LessonComponent implements OnInit {
     });
   }
 
-  remove(id: string) {
+  remove(id?: string) {
     this.lessonService.remove(id).subscribe(result => {
       console.log(result);
       this.fetchList();
@@ -76,5 +83,22 @@ export class LessonComponent implements OnInit {
     this.fetchList();
     this.fetchListBook();
     this.fetchListSection();
+    this.fetchListCategory();
+  }
+
+  fetchListCategory() {
+    this.categoryService.findAll().subscribe((result) => {
+      this.categories = result;
+    });
+  }
+
+  getCategory(id?: string) {
+    return this.categories.find(c => c._id === id);
+  }
+
+  scrapingVocabulary(lessonId?: string, lessonCloneUrl?: string) {
+    this.vocabularyService.scraping(lessonId, lessonCloneUrl).subscribe(result => {
+      console.log(result);
+    });
   }
 }

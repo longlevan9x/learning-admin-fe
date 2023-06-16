@@ -23,11 +23,14 @@ export class LessonService {
     return this.http.put(environment.apiUrl + '/lessons/' + id, body);
   }
 
-  remove(id: string) {
+  remove(id?: string) {
     return this.http.delete(environment.apiUrl + '/lessons/' + id);
   }
 
   findAllSection() {
     return this.http.get(environment.apiUrl + '/lessons/sections');
+  }
+  clone(categoryId: string) {
+    return this.http.post(environment.apiUrl + '/lessons/clone', {categoryId});
   }
 }

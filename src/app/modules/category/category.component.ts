@@ -3,6 +3,7 @@ import {NzModalService} from "ng-zorro-antd/modal";
 import {CategoryFormModalComponent} from "./category-form-modal/category-form-modal.component";
 import {CategoryModel} from "../../models/category.model";
 import {CategoryService} from "../../services/category.service";
+import {LessonService} from "../../services/lesson.service";
 
 @Component({
   selector: 'app-category',
@@ -12,7 +13,7 @@ import {CategoryService} from "../../services/category.service";
 export class CategoryComponent implements OnInit {
   categories: CategoryModel[] = [];
 
-  constructor(private modalService: NzModalService, private categoryService: CategoryService) {
+  constructor(private modalService: NzModalService, private categoryService: CategoryService, private lessonService: LessonService) {
   }
 
   openModal(category?: any): void {
@@ -61,5 +62,11 @@ export class CategoryComponent implements OnInit {
 
   getCategoryParent(id?: string) {
     return this.categories.find(c => c._id === id);
+  }
+
+  cloneLesson(categoryId: string) {
+    this.lessonService.clone(categoryId).subscribe(result => {
+      console.log(result);
+    });
   }
 }

@@ -1,5 +1,5 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:3000'
+  apiUrl: 'https://learning-api.vercel.app'
 };

@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { LessonRoutingModule } from './lesson-routing.module';
-import { LessonComponent } from './lesson.component';
-import { LessonFormModalComponent } from './lesson-form-modal/lesson-form-modal.component';
-import {NzIconModule} from "ng-zorro-antd/icon";
-import {NzTableModule} from "ng-zorro-antd/table";
+import {LessonRoutingModule} from './lesson-routing.module';
+import {LessonComponent} from './lesson.component';
+import {LessonFormModalComponent} from './lesson-form-modal/lesson-form-modal.component';
 import {FormsModule} from "@angular/forms";
-import {NzSelectModule} from "ng-zorro-antd/select";
+import {NgZorroAntdModule} from "../../ng-zorro-antd.module";
+import {IconsProviderModule} from "../../icons-provider.module";
 
 
 @NgModule({
@@ -15,13 +14,13 @@ import {NzSelectModule} from "ng-zorro-antd/select";
     LessonComponent,
     LessonFormModalComponent
   ],
-    imports: [
-        CommonModule,
-        LessonRoutingModule,
-        NzIconModule,
-        NzTableModule,
-        FormsModule,
-        NzSelectModule
-    ]
+  imports: [
+    CommonModule,
+    LessonRoutingModule,
+    FormsModule,
+    IconsProviderModule,
+    NgZorroAntdModule,
+  ]
 })
-export class LessonModule { }
+export class LessonModule {
+}

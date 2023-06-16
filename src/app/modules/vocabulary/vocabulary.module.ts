@@ -1,21 +1,24 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { VocabularyRoutingModule } from './vocabulary-routing.module';
-import { VocabularyComponent } from './vocabulary.component';
-import {NzIconModule} from "ng-zorro-antd/icon";
-import {NzTableModule} from "ng-zorro-antd/table";
+import {VocabularyRoutingModule} from './vocabulary-routing.module';
+import {VocabularyComponent} from './vocabulary.component';
+import {IconsProviderModule} from "../../icons-provider.module";
+import {NgZorroAntdModule} from "../../ng-zorro-antd.module";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [
     VocabularyComponent
   ],
-    imports: [
-        CommonModule,
-        VocabularyRoutingModule,
-        NzIconModule,
-        NzTableModule
-    ]
+  imports: [
+    CommonModule,
+    VocabularyRoutingModule,
+    FormsModule,
+    IconsProviderModule,
+    NgZorroAntdModule,
+  ]
 })
-export class VocabularyModule { }
+export class VocabularyModule {
+}

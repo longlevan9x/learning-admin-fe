@@ -19,10 +19,12 @@ export class LessonComponent implements OnInit {
   books: BookModel[] = [];
   categories: CategoryModel[] = [];
 
-  constructor(private modalService: NzModalService, private lessonService: LessonService,
-              private bookService: BookService,
-              private categoryService: CategoryService,
-              private vocabularyService: VocabularyService,
+  constructor(
+    private modalService: NzModalService,
+    private lessonService: LessonService,
+    private bookService: BookService,
+    private categoryService: CategoryService,
+    private vocabularyService: VocabularyService,
   ) {
   }
 

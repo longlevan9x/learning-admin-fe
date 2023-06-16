@@ -10,8 +10,8 @@ export class VocabularyService {
   constructor(private http: HttpClient) {
   }
 
-  findAll(): Observable<any> {
-    return this.http.get(environment.apiUrl + '/vocabularies');
+  findAll(params?: any): Observable<any> {
+    return this.http.get(environment.apiUrl + '/vocabularies', {params: params});
   }
 
   scraping(lessonId?: string, scrapingUrl?: string) {

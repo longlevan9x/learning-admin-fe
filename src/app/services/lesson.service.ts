@@ -11,8 +11,8 @@ export class LessonService {
   }
 
 
-  findAll(): Observable<any> {
-    return this.http.get(environment.apiUrl + '/lessons');
+  findAll(params?: any): Observable<any> {
+    return this.http.get(environment.apiUrl + '/lessons', {params: params});
   }
 
   create(body: any): Observable<any> {

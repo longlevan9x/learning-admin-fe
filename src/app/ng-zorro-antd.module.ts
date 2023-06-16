@@ -6,6 +6,7 @@ import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {NzModalModule} from "ng-zorro-antd/modal";
 import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzTreeSelectModule} from "ng-zorro-antd/tree-select";
 
 @NgModule({
   exports: [
@@ -15,7 +16,8 @@ import {NzSelectModule} from "ng-zorro-antd/select";
     NzBreadCrumbModule,
     NzTableModule,
     NzModalModule,
-    NzSelectModule
+    NzSelectModule,
+    NzTreeSelectModule
   ],
 })
 export class NgZorroAntdModule {}

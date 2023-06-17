@@ -30,7 +30,7 @@ export class LessonService {
   findAllSection() {
     return this.http.get(environment.apiUrl + '/lessons/sections');
   }
-  clone(categoryId: string) {
-    return this.http.post(environment.apiUrl + '/lessons/clone', {categoryId});
+  scraping(categoryId: string) {
+    return this.http.post(environment.apiUrl + '/lessons/scraping', {categoryId});
   }
 }

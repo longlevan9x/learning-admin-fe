@@ -8,12 +8,14 @@ import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {FormsModule} from "@angular/forms";
 import {NzSelectModule} from "ng-zorro-antd/select";
+import { CategoryTreeComponent } from './category-tree/category-tree.component';
 
 
 @NgModule({
   declarations: [
     CategoryComponent,
-    CategoryFormModalComponent
+    CategoryFormModalComponent,
+    CategoryTreeComponent
   ],
   imports: [
     CommonModule,

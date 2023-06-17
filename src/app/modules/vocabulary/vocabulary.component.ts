@@ -5,6 +5,7 @@ import {LessonService} from "../../services/lesson.service";
 import {LessonModel} from "../../models/lesson.model";
 import {CategoryModel} from "../../models/category.model";
 import {CategoryService} from "../../services/category.service";
+import {UtilsShared} from "../../shareds/utils.shared";
 
 @Component({
   selector: 'app-vocabulary',
@@ -22,6 +23,7 @@ export class VocabularyComponent implements OnInit {
     private vocabularyService: VocabularyService,
     private lessonService: LessonService,
     private categoryService: CategoryService,
+    private utilsShared: UtilsShared
   ) {
   }
 
@@ -39,8 +41,7 @@ export class VocabularyComponent implements OnInit {
   fetchListCategory() {
     this.categoryService.findAll().subscribe((categories) => {
       this.categories = categories;
-      this.categoryTrees = this.convertToTree(categories, '');
-      console.log(this.categoryTrees)
+      this.categoryTrees = this.utilsShared.convertToTree(categories, '', {key: 'key', value: 'title'});
     });
   }
 
@@ -60,65 +61,4 @@ export class VocabularyComponent implements OnInit {
   onFilterCategoryChange(categoryId: any) {
     this.fetchListLesson();
   }
-
-  //
-  // convertToTree(list: any[]): any[] {
-  //   const map: { [key: number]: any } = {};
-  //   const tree: any[] = [];
-  //
-  //   // Tạo một bản đồ cho các mục theo id
-  //   list.forEach(item => {
-  //     const _item: any = {
-  //       title: item.name,
-  //       key: item._id
-  //     }
-  //
-  //     map[item._id] = _item;
-  //     _item.children = [];
-  //   });
-  //
-  //   // Xây dựng cây với mục gốc (parentId không tồn tại)
-  //   list.forEach(item => {
-  //     if (item.parentId) {
-  //       const parent = map[item.parentId];
-  //       if (parent) {
-  //         parent.children.push(item);
-  //       }
-  //     } else {
-  //       tree.push(item);
-  //     }
-  //   });
-  //
-  //   return tree;
-  // }
-  //
-
-  convertToTree(list: TreeNode[], parentId?: string): TreeNode[] {
-    const tree: any[] = [];
-
-    list.forEach((item: any)=> {
-      const _item: any = {
-        key: item._id,
-        title: item.name,
-        children: []
-      };
-
-      if (item.parentId == parentId) {
-        const children = this.convertToTree(list, item._id);
-        if (children.length > 0) {
-          _item.children = children;
-        }
-        tree.push(_item);
-      }
-    });
-
-    return tree;
-  }
-}
-
-interface TreeNode {
-  id: number;
-  name: string;
-  parentId?: number;
-  children?: TreeNode[];
 }

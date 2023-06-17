@@ -1,0 +1,43 @@
+<tbody class="bg-white divide-y divide-gray-200">
+<ng-container *ngFor="let category of categories;let i = index;">
+  <tr>
+    <td class="px-6 py-4 whitespace-nowrap flex items-center cursor-pointer">
+      <span nz-icon
+            [nzType]="getIconToggle(category)"
+            nzTheme="outline"
+            class="mr-2"
+            (click)="toggleChildren(i)"></span>
+      {{i + 1}}. {{category.name}}
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap">
+      <a [href]="'https://www.vnjpclub.com' + category.cloneUrl"
+         target="_blank">
+        {{category.cloneUrl}}
+      </a>
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap flex justify-end">
+      <button class="flex items-center bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-1"
+              *ngIf="!category.children?.length"
+              (click)="scrapingLesson(category._id)">
+        <i nz-icon nzType="edit" class="mr-2"></i> Clone Lesson
+      </button>
+      <button class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1"
+              (click)="openModal(category)">
+        <i nz-icon nzType="edit" class="mr-2"></i> Chỉnh sửa
+      </button>
+      <button class="flex items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4"
+              (click)="remove(category._id)">
+        <i nz-icon nzType="delete" class="mr-2"></i>
+        Xóa
+      </button>
+    </td>
+  </tr>
+  <ng-container *ngIf="category.showChildren">
+    <tr *ngIf="category.children?.length">
+      <td colspan="3" class="pl-16">
+        <app-category-tree [categories]="category.children" class="inline-table w-full"></app-category-tree>
+      </td>
+    </tr>
+  </ng-container>
+</ng-container>
+</tbody>

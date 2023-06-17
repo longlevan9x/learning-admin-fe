@@ -4,6 +4,7 @@ import {CategoryFormModalComponent} from "./category-form-modal/category-form-mo
 import {CategoryModel} from "../../models/category.model";
 import {CategoryService} from "../../services/category.service";
 import {LessonService} from "../../services/lesson.service";
+import {UtilsShared} from "../../shareds/utils.shared";
 
 @Component({
   selector: 'app-category',
@@ -12,8 +13,12 @@ import {LessonService} from "../../services/lesson.service";
 })
 export class CategoryComponent implements OnInit {
   categories: CategoryModel[] = [];
+  tree: any[] = []
 
-  constructor(private modalService: NzModalService, private categoryService: CategoryService, private lessonService: LessonService) {
+  constructor(
+    private modalService: NzModalService,
+    private utilsShared: UtilsShared,
+              private categoryService: CategoryService, private lessonService: LessonService) {
   }
 
   openModal(category?: any): void {
@@ -50,12 +55,12 @@ export class CategoryComponent implements OnInit {
   fetchList() {
     this.categoryService.findAll().subscribe((categories) => {
       this.categories = categories;
+      this.tree = this.utilsShared.convertToTree(categories, '');
     });
   }
 
   remove(id: string) {
     this.categoryService.remove(id).subscribe(result => {
-      console.log(result);
       this.fetchList();
     });
   }
@@ -65,7 +70,7 @@ export class CategoryComponent implements OnInit {
   }
 
   cloneLesson(categoryId: string) {
-    this.lessonService.clone(categoryId).subscribe(result => {
+    this.lessonService.scraping(categoryId).subscribe(result => {
       console.log(result);
     });
   }

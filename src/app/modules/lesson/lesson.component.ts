@@ -8,6 +8,7 @@ import {BookModel} from "../../models/book.model";
 import {CategoryService} from "../../services/category.service";
 import {CategoryModel} from "../../models/category.model";
 import {VocabularyService} from "../../services/vocabulary.service";
+import {UtilsShared} from "../../shareds/utils.shared";
 
 @Component({
   selector: 'app-lesson',
@@ -18,6 +19,8 @@ export class LessonComponent implements OnInit {
   lessons: LessonModel[] = [];
   books: BookModel[] = [];
   categories: CategoryModel[] = [];
+  categoryTrees: any[] = [];
+  filter: {categoryId?: string} = {}
 
   constructor(
     private modalService: NzModalService,
@@ -25,6 +28,7 @@ export class LessonComponent implements OnInit {
     private bookService: BookService,
     private categoryService: CategoryService,
     private vocabularyService: VocabularyService,
+    private utilsShared: UtilsShared,
   ) {
   }
 
@@ -53,7 +57,7 @@ export class LessonComponent implements OnInit {
   }
 
   fetchList() {
-    this.lessonService.findAll().subscribe(results => {
+    this.lessonService.findAll(this.filter).subscribe(results => {
       this.lessons = results;
     });
   }
@@ -89,8 +93,9 @@ export class LessonComponent implements OnInit {
   }
 
   fetchListCategory() {
-    this.categoryService.findAll().subscribe((result) => {
-      this.categories = result;
+    this.categoryService.findAll().subscribe((categories) => {
+      this.categories = categories;
+      this.categoryTrees = this.utilsShared.convertToTree(categories, '', {key: 'key', value: 'title'});
     });
   }
 
@@ -102,5 +107,9 @@ export class LessonComponent implements OnInit {
     this.vocabularyService.scraping(lessonId, lessonCloneUrl).subscribe(result => {
       console.log(result);
     });
+  }
+
+  onFilterCategoryChange(categoryId: any) {
+    this.fetchList();
   }
 }

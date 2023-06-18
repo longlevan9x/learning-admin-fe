@@ -9,6 +9,7 @@ import {CategoryService} from "../../services/category.service";
 import {CategoryModel} from "../../models/category.model";
 import {VocabularyService} from "../../services/vocabulary.service";
 import {UtilsShared} from "../../shareds/utils.shared";
+import {GrammarService} from "../../services/grammar.service";
 
 @Component({
   selector: 'app-lesson',
@@ -28,6 +29,7 @@ export class LessonComponent implements OnInit {
     private bookService: BookService,
     private categoryService: CategoryService,
     private vocabularyService: VocabularyService,
+    private grammarService: GrammarService,
     private utilsShared: UtilsShared,
   ) {
   }
@@ -105,6 +107,11 @@ export class LessonComponent implements OnInit {
 
   scrapingVocabulary(lessonId?: string, lessonCloneUrl?: string) {
     this.vocabularyService.scraping(lessonId, lessonCloneUrl).subscribe(result => {
+      console.log(result);
+    });
+  }
+  scrapingGrammar(lessonId?: string, lessonCloneUrl?: string) {
+    this.grammarService.scraping(lessonId, lessonCloneUrl).subscribe(result => {
       console.log(result);
     });
   }

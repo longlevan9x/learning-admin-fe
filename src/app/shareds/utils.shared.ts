@@ -11,6 +11,10 @@ interface TreeNode {
   providedIn: 'root'
 })
 export class UtilsShared {
+  treeForNgZorro(list: TreeNode[]) {
+    return this.convertToTree(list, '', {key: 'key', value: 'title'})
+  }
+
   convertToTree(list: TreeNode[], parentId?: string, mapKey?: { key: string, value: string }): TreeNode[] {
     const tree: any[] = [];
 
@@ -32,8 +36,7 @@ export class UtilsShared {
         const children = this.convertToTree(list, item._id, mapKey);
         if (children.length > 0) {
           _item.children = children;
-        }
-        else {
+        } else {
           _item.isLeaf = true;
         }
 

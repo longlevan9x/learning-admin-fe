@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'lessons', loadChildren: () => import('./modules/lesson/lesson.module').then(m => m.LessonModule) },
   { path: 'categories', loadChildren: () => import('./modules/category/category.module').then(m => m.CategoryModule) },
   { path: 'vocabularies', loadChildren: () => import('./modules/vocabulary/vocabulary.module').then(m => m.VocabularyModule) },
+  { path: 'grammars', loadChildren: () => import('./modules/grammar/grammar.module').then(m => m.GrammarModule) },
 ];
 
 @NgModule({

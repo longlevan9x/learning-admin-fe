@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
@@ -14,7 +14,7 @@ export class VocabularyService {
     return this.http.get(environment.apiUrl + '/vocabularies', {params: params});
   }
 
-  scraping(lessonId?: string, scrapingUrl?: string) {
-    return this.http.post(environment.apiUrl + '/vocabularies/scraping', {lessonId, scrapingUrl});
+  scraping(lessonId?: string, categoryId?: string, scrapingUrl?: string) {
+    return this.http.post(environment.apiUrl + '/vocabularies/scraping', {lessonId, categoryId, scrapingUrl});
   }
 }

@@ -21,7 +21,7 @@ export class LessonComponent implements OnInit {
   books: BookModel[] = [];
   categories: CategoryModel[] = [];
   categoryTrees: any[] = [];
-  filter: {categoryId?: string} = {}
+  filter: { categoryId?: string } = {}
 
   constructor(
     private modalService: NzModalService,
@@ -105,11 +105,12 @@ export class LessonComponent implements OnInit {
     return this.categories.find(c => c._id === id);
   }
 
-  scrapingVocabulary(lessonId?: string, lessonCloneUrl?: string) {
-    this.vocabularyService.scraping(lessonId, lessonCloneUrl).subscribe(result => {
+  scrapingVocabulary(lessonId?: string, categoryId?: string, lessonCloneUrl?: string) {
+    this.vocabularyService.scraping(lessonId, categoryId, lessonCloneUrl).subscribe(result => {
       console.log(result);
     });
   }
+
   scrapingGrammar(lessonId?: string, lessonCloneUrl?: string) {
     this.grammarService.scraping(lessonId, lessonCloneUrl).subscribe(result => {
       console.log(result);

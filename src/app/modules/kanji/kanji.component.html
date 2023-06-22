@@ -33,7 +33,8 @@
   <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="exportexcel()">
     Export Excel
   </button>
-  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="openModal()">Tạo mới
+  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="openModal()">
+    Tạo mới
   </button>
 </div>
 
@@ -53,13 +54,12 @@
   </tr>
   </thead>
   <tbody class="bg-white divide-y divide-gray-200">
-  <tr *ngFor="let vocabulary of vocabularies;let i = index">
+  <tr *ngFor="let kanji of kanjis;let i = index">
     <td class="px-6 py-4 whitespace-nowrap">{{i + 1}}</td>
-    <td class="px-6 py-4 whitespace-nowrap">{{vocabulary.vocabulary}}</td>
-    <td class="px-6 py-4 whitespace-nowrap">{{vocabulary.kanji}}</td>
-    <td class="px-6 py-4 whitespace-nowrap">{{vocabulary.vietnam_sound}}</td>
-    <td class="px-6 py-4 whitespace-nowrap">{{vocabulary.mediaUrl}}</td>
-    <td class="px-6 py-4 whitespace-nowrap">{{vocabulary.mean}}</td>
+    <td class="px-6 py-4 whitespace-nowrap">{{kanji.vocabulary}}</td>
+    <td class="px-6 py-4 whitespace-nowrap">{{kanji.kanji}}</td>
+    <td class="px-6 py-4 whitespace-nowrap">{{kanji.vietnam_sound}}</td>
+    <td class="px-6 py-4 whitespace-nowrap">{{kanji.mean}}</td>
     <td class="px-6 py-4 whitespace-nowrap flex">
     </td>
   </tr>

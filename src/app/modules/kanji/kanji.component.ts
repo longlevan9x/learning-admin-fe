@@ -1,28 +1,28 @@
 import {Component, OnInit} from '@angular/core';
-import {VocabularyService} from "../../services/vocabulary.service";
-import {VocabularyModel} from "../../models/vocabulary.model";
-import {LessonService} from "../../services/lesson.service";
-import {LessonModel} from "../../models/lesson.model";
 import {CategoryModel} from "../../models/category.model";
+import {LessonModel} from "../../models/lesson.model";
+import {LessonService} from "../../services/lesson.service";
 import {CategoryService} from "../../services/category.service";
 import {UtilsShared} from "../../shareds/utils.shared";
 import {ActivatedRoute} from "@angular/router";
-import * as XLSX from "xlsx";
+import {KanjiService} from "../../services/kanji.service";
+import {KanjiModel} from "../../models/kanji.model";
+import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'app-vocabulary',
-  templateUrl: './vocabulary.component.html',
-  styleUrls: ['./vocabulary.component.scss']
+  selector: 'app-kanji',
+  templateUrl: './kanji.component.html',
+  styleUrls: ['./kanji.component.scss']
 })
-export class VocabularyComponent implements OnInit {
+export class KanjiComponent implements OnInit {
   categories: CategoryModel[] = [];
   categoryTrees: any = [];
-  vocabularies: VocabularyModel[] = [];
+  kanjis: KanjiModel[] = [];
   lessons: LessonModel[] = [];
   filter: { lessonId?: string, categoryId?: string } = {};
 
   constructor(
-    private vocabularyService: VocabularyService,
+    private kanjiService: KanjiService,
     private lessonService: LessonService,
     private categoryService: CategoryService,
     private utilsShared: UtilsShared,
@@ -47,8 +47,8 @@ export class VocabularyComponent implements OnInit {
   }
 
   fetchList() {
-    this.vocabularyService.findAll(this.filter).subscribe((vocabularies) => {
-      this.vocabularies = vocabularies;
+    this.kanjiService.findAll(this.filter).subscribe((kanjis) => {
+      this.kanjis = kanjis;
     });
   }
 
@@ -77,7 +77,7 @@ export class VocabularyComponent implements OnInit {
   }
 
   exportexcel(): void {
-    const data = this.vocabularies.map(k => {
+    const data = this.kanjis.map(k => {
       return {
         kanji: k.kanji,
         vocabulary: k.vocabulary,
@@ -89,6 +89,6 @@ export class VocabularyComponent implements OnInit {
     const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(data);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    XLSX.writeFile(wb, 'vocabulary.xlsx');
+    XLSX.writeFile(wb, 'kanji.xlsx');
   }
 }

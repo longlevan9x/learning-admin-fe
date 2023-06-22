@@ -10,6 +10,8 @@ import {CategoryModel} from "../../models/category.model";
 import {VocabularyService} from "../../services/vocabulary.service";
 import {UtilsShared} from "../../shareds/utils.shared";
 import {GrammarService} from "../../services/grammar.service";
+import {KanjiService} from "../../services/kanji.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-lesson',
@@ -29,8 +31,10 @@ export class LessonComponent implements OnInit {
     private bookService: BookService,
     private categoryService: CategoryService,
     private vocabularyService: VocabularyService,
+    private kanjiService: KanjiService,
     private grammarService: GrammarService,
     private utilsShared: UtilsShared,
+    private route: ActivatedRoute
   ) {
   }
 
@@ -88,10 +92,17 @@ export class LessonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchList();
     this.fetchListBook();
     this.fetchListSection();
     this.fetchListCategory();
+    this.route.queryParams
+      .subscribe((params: any) => {
+        if (params.cateId ) {
+          this.filter.categoryId = params.cateId;
+        }
+
+        this.fetchList();
+      });
   }
 
   fetchListCategory() {
@@ -107,6 +118,12 @@ export class LessonComponent implements OnInit {
 
   scrapingVocabulary(lessonId?: string, categoryId?: string, lessonCloneUrl?: string) {
     this.vocabularyService.scraping(lessonId, categoryId, lessonCloneUrl).subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  scrapingKanji(lessonId?: string, categoryId?: string, lessonCloneUrl?: string) {
+    this.kanjiService.scraping(lessonId, categoryId, lessonCloneUrl).subscribe(result => {
       console.log(result);
     });
   }

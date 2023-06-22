@@ -32,6 +32,10 @@
               (click)="cloneLesson(category._id)">
         <i nz-icon nzType="edit" class="mr-2"></i> Clone Lesson
       </button>
+      <button class="flex items-center bg-emerald-300 hover:bg-emerald-700 text-white font-bold py-2 px-4 mr-1"
+              [routerLink]="'lessons'" [queryParams]="{cateId: category._id}">
+        <i nz-icon nzType="arrow-right" class="mr-2"></i> Go to Lesson
+      </button>
       <button class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1"
               (click)="openModal(category)">
         <i nz-icon nzType="edit" class="mr-2"></i> Chỉnh sửa

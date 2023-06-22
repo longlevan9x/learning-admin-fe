@@ -6,6 +6,7 @@ import {LessonModel} from "../../models/lesson.model";
 import {CategoryModel} from "../../models/category.model";
 import {CategoryService} from "../../services/category.service";
 import {UtilsShared} from "../../shareds/utils.shared";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-vocabulary',
@@ -23,13 +24,25 @@ export class VocabularyComponent implements OnInit {
     private vocabularyService: VocabularyService,
     private lessonService: LessonService,
     private categoryService: CategoryService,
-    private utilsShared: UtilsShared
+    private utilsShared: UtilsShared,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
-    this.fetchList();
     this.fetchListCategory();
+    this.route.queryParams.subscribe((params: any) => {
+      if (params.cateId) {
+        this.filter.categoryId = params.cateId;
+        this.fetchListLesson();
+      }
+
+      if (params.lessonId) {
+        this.filter.lessonId = params.lessonId;
+      }
+
+      this.fetchList();
+    });
   }
 
   fetchList() {

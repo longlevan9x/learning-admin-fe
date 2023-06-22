@@ -19,6 +19,7 @@ export class UtilsShared {
     const tree: any[] = [];
 
     list.forEach((item: any) => {
+      item.showChildren = true;
       let _item: any = null;
       if (mapKey) {
         _item = {

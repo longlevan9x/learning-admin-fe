@@ -26,27 +26,40 @@
     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Book</th>
     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sections</th>
-    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" *ngIf="false">Clone Url</th>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" *ngIf="false">
+      Clone Url
+    </th>
     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
   </tr>
   </thead>
   <tbody class="bg-white divide-y divide-gray-200">
   <tr *ngFor="let lesson of lessons;let i = index">
-    <td class="px-6 py-4 whitespace-nowrap">{{i+1}}</td>
+    <td class="px-6 py-4 whitespace-nowrap">{{i + 1}}</td>
     <td class="px-6 py-4 whitespace-nowrap">{{lesson.name}}</td>
     <td class="px-6 py-4 whitespace-nowrap">{{getBook(lesson.bookId)?.name}}</td>
     <td class="px-6 py-4 whitespace-nowrap">{{getCategory(lesson.categoryId)?.name}}</td>
     <td class="px-6 py-4 whitespace-nowrap">{{lesson.sections?.toString()}}</td>
     <td class="px-6 py-4 whitespace-nowrap" *ngIf="false">
-      <a [href]="'https://www.vnjpclub.com' + lesson.cloneUrl" target="_blank">{{'https://www.vnjpclub.com' + lesson.cloneUrl}}</a>
+      <a [href]="'https://www.vnjpclub.com' + lesson.cloneUrl"
+         target="_blank">{{'https://www.vnjpclub.com' + lesson.cloneUrl}}</a>
     </td>
     <td class="px-6 py-4 whitespace-nowrap flex">
       <button class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1"
               (click)="scrapingVocabulary(lesson._id, lesson.categoryId, lesson.cloneUrl)">
         <i nz-icon nzType="edit" class="mr-2"></i> Get Vocabulary
       </button>
+      <button class="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-1"
+              routerLink="/vocabularies" [queryParams]="{cateId: lesson.categoryId, lessonId: lesson._id}">
+        <i nz-icon nzType="arrow-right" class="mr-2"></i> Goto Vocabulary
+      </button>
       <button class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1"
-              (click)="scrapingGrammar(lesson._id, lesson.cloneUrl)">
+              (click)="scrapingKanji(lesson._id, lesson.categoryId, lesson.cloneUrl)">
+        <i nz-icon nzType="edit" class="mr-2"></i> Get Kanji
+      </button>
+      <button
+        *ngIf="false"
+        class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1"
+        (click)="scrapingGrammar(lesson._id, lesson.cloneUrl)">
         <i nz-icon nzType="edit" class="mr-2"></i> Get Grammar
       </button>
       <button class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1"

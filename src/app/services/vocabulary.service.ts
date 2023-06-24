@@ -15,6 +15,10 @@ export class VocabularyService {
   }
 
   scraping(lessonId?: string, categoryId?: string, scrapingUrl?: string) {
-    return this.http.post(environment.apiUrl + '/vocabularies/scraping', {lessonId, categoryId, scrapingUrl});
+    return this.http.post(environment.apiUrl + '/vocabularies/scraping', {
+      lessonId,
+      categoryId,
+      scrapingUrl
+    });
   }
 }

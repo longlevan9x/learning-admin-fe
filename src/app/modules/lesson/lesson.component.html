@@ -52,8 +52,8 @@
               routerLink="/vocabularies" [queryParams]="{cateId: lesson.categoryId, lessonId: lesson._id}">
         <i nz-icon nzType="arrow-right" class="mr-2"></i> Goto Vocabulary
       </button>
-      <button class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1"
-              (click)="scrapingKanji(lesson._id, lesson.categoryId, lesson.cloneUrl)">
+      <button (click)="scrapingKanji(lesson._id, lesson.categoryId, lesson.cloneUrl)"
+              class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1">
         <i nz-icon nzType="edit" class="mr-2"></i> Get Kanji
       </button>
       <button

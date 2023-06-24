@@ -97,7 +97,7 @@ export class LessonComponent implements OnInit {
     this.fetchListCategory();
     this.route.queryParams
       .subscribe((params: any) => {
-        if (params.cateId ) {
+        if (params.cateId) {
           this.filter.categoryId = params.cateId;
         }
 
@@ -123,9 +123,10 @@ export class LessonComponent implements OnInit {
   }
 
   scrapingKanji(lessonId?: string, categoryId?: string, lessonCloneUrl?: string) {
-    this.kanjiService.scraping(lessonId, categoryId, lessonCloneUrl).subscribe(result => {
-      console.log(result);
-    });
+    this.kanjiService.scraping(lessonId, categoryId, lessonCloneUrl)
+      .subscribe(result => {
+        console.log(result);
+      });
   }
 
   scrapingGrammar(lessonId?: string, lessonCloneUrl?: string) {

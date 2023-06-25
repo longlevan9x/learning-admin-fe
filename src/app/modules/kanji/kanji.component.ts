@@ -76,6 +76,10 @@ export class KanjiComponent implements OnInit {
     this.fetchListLesson();
   }
 
+  getLesson(lessonId?: string) {
+    return this.lessons.find(l => l._id === lessonId);
+  }
+
   exportexcel(): void {
     const data = this.kanjis.map(k => {
       return {
@@ -86,9 +90,11 @@ export class KanjiComponent implements OnInit {
       }
     });
 
+    const lesson = this.getLesson(this.filter.lessonId);
+
     const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(data);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    XLSX.writeFile(wb, 'kanji.xlsx');
+    XLSX.writeFile(wb, `kanji-${lesson?.name}.xlsx`);
   }
 }

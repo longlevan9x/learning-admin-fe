@@ -79,7 +79,7 @@ export class VocabularyComponent implements OnInit {
   exportexcel(): void {
     const data = this.vocabularies.map(k => {
       return {
-        kanji: k.kanji,
+        kanji: k.kanji?.replace(/(\(.*?\))/, ''),
         vocabulary: k.vocabulary,
         vietnam_sound: k.vietnam_sound,
         mean: k.mean,

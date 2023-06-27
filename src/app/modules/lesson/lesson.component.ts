@@ -11,7 +11,7 @@ import {VocabularyService} from "../../services/vocabulary.service";
 import {UtilsShared} from "../../shareds/utils.shared";
 import {GrammarService} from "../../services/grammar.service";
 import {KanjiService} from "../../services/kanji.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-lesson',
@@ -24,6 +24,15 @@ export class LessonComponent implements OnInit {
   categories: CategoryModel[] = [];
   categoryTrees: any[] = [];
   filter: { categoryId?: string } = {}
+  subjects: string[] = [];
+  SUBJECTS = {
+    VOCABULARY: 'VOCABULARY',
+    GRAMMAR: 'GRAMMAR',
+    READING_PRACTICE: 'READING_PRACTICE',
+    KANJI: 'KANJI',
+    LISTENING: 'LISTENING',
+    READING: 'READING',
+  };
 
   constructor(
     private modalService: NzModalService,
@@ -34,7 +43,8 @@ export class LessonComponent implements OnInit {
     private kanjiService: KanjiService,
     private grammarService: GrammarService,
     private utilsShared: UtilsShared,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
@@ -81,9 +91,9 @@ export class LessonComponent implements OnInit {
     });
   }
 
-  fetchListSection() {
-    this.lessonService.findAllSection().subscribe(results => {
-      console.log(results);
+  fetchListSubject() {
+    this.lessonService.findAllSubject().subscribe((results: any) => {
+      this.subjects = results;
     })
   }
 
@@ -93,7 +103,7 @@ export class LessonComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchListBook();
-    this.fetchListSection();
+    this.fetchListSubject();
     this.fetchListCategory();
     this.route.queryParams
       .subscribe((params: any) => {
@@ -132,6 +142,28 @@ export class LessonComponent implements OnInit {
   scrapingGrammar(lessonId?: string, lessonCloneUrl?: string) {
     this.grammarService.scraping(lessonId, lessonCloneUrl).subscribe(result => {
       console.log(result);
+    });
+  }
+
+  scrapingSubject(lessonId?: string, lessonCloneUrl?: string, subject?: string) {
+    if (subject === this.SUBJECTS.VOCABULARY) {
+      this.scrapingVocabulary(lessonId, '', lessonCloneUrl);
+    } else if (subject === this.SUBJECTS.GRAMMAR) {
+      this.scrapingGrammar(lessonId, lessonCloneUrl);
+    } else if (subject === this.SUBJECTS.KANJI) {
+      this.scrapingKanji(lessonId, '', lessonCloneUrl);
+    }
+  }
+
+  gotoDetailSubject(categoryId?: string, lessonId?: string, subject?: string) {
+    const urls = {
+      [this.SUBJECTS.VOCABULARY]: '/vocabularies',
+      [this.SUBJECTS.KANJI]: '/kanjis',
+      [this.SUBJECTS.GRAMMAR]: '/grammars',
+    }
+
+    this.router.navigate([urls[subject || '']], {
+      queryParams: {cateId: categoryId, lessonId: lessonId}
     });
   }
 

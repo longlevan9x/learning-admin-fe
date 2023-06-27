@@ -7,6 +7,9 @@ import {NzTableModule} from "ng-zorro-antd/table";
 import {NzModalModule} from "ng-zorro-antd/modal";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzTreeSelectModule} from "ng-zorro-antd/tree-select";
+import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzDropDownModule} from "ng-zorro-antd/dropdown";
+import {NzPopoverModule} from "ng-zorro-antd/popover";
 
 @NgModule({
   exports: [
@@ -17,7 +20,10 @@ import {NzTreeSelectModule} from "ng-zorro-antd/tree-select";
     NzTableModule,
     NzModalModule,
     NzSelectModule,
-    NzTreeSelectModule
+    NzTreeSelectModule,
+    NzButtonModule,
+    NzDropDownModule,
+    NzPopoverModule
   ],
 })
 export class NgZorroAntdModule {}

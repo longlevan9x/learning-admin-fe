@@ -3,6 +3,7 @@ export interface LessonModel {
   name: string;
   bookId?: string;
   sections?: string[];
+  subjects?: string[];
   cloneUrl?: string;
   categoryId?: string;
 }

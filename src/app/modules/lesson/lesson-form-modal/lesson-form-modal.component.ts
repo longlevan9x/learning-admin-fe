@@ -37,7 +37,7 @@ export class LessonFormModalComponent implements OnInit {
   }
 
   fetchListSection() {
-    this.lessonService.findAllSection().subscribe((results: any) => {
+    this.lessonService.findAllSubject().subscribe((results: any) => {
       this.sections = results;
     })
   }

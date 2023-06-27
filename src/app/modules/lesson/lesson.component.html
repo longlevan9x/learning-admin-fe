@@ -44,33 +44,35 @@
          target="_blank">{{'https://www.vnjpclub.com' + lesson.cloneUrl}}</a>
     </td>
     <td class="px-6 py-4 whitespace-nowrap flex">
-      <button class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1"
-              (click)="scrapingVocabulary(lesson._id, lesson.categoryId, lesson.cloneUrl)">
-        <i nz-icon nzType="edit" class="mr-2"></i> Get Vocabulary
-      </button>
-      <button class="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-1"
-              routerLink="/vocabularies" [queryParams]="{cateId: lesson.categoryId, lessonId: lesson._id}">
-        <i nz-icon nzType="arrow-right" class="mr-2"></i> Goto Vocabulary
-      </button>
-      <button (click)="scrapingKanji(lesson._id, lesson.categoryId, lesson.cloneUrl)"
-              class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1">
-        <i nz-icon nzType="edit" class="mr-2"></i> Get Kanji
-      </button>
-      <button
-        *ngIf="false"
-        class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1"
-        (click)="scrapingGrammar(lesson._id, lesson.cloneUrl)">
-        <i nz-icon nzType="edit" class="mr-2"></i> Get Grammar
-      </button>
-      <button class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-1"
+      <button class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4"
               (click)="openModal(lesson)">
         <i nz-icon nzType="edit" class="mr-2"></i> Chỉnh sửa
       </button>
-      <button class="flex items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4"
+      <button class="flex items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 ml-1"
               (click)="remove(lesson._id)">
         <i nz-icon nzType="delete" class="mr-2"></i>
         Xóa
       </button>
+      <button
+        class="flex border items-center font-bold py-2 px-4 ml-1"
+        nz-popover [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottom">
+        <span nz-icon nzType="more"></span>
+      </button>
+
+      <ng-template #contentTemplate>
+        <div class="flex flex-col">
+          <ng-container *ngFor="let subject of lesson.subjects">
+            <button class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mb-1"
+                    (click)="scrapingSubject(lesson._id, lesson.cloneUrl, subject)">
+              <i nz-icon nzType="edit" class="mr-2"></i> Get {{subject}}
+            </button>
+            <button class="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-1"
+                    (click)="gotoDetailSubject(lesson.categoryId, lesson._id, subject)">
+              <i nz-icon nzType="arrow-right" class="mr-2"></i> Goto {{subject}}
+            </button>
+          </ng-container>
+        </div>
+      </ng-template>
     </td>
   </tr>
   </tbody>

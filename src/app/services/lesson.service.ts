@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
@@ -27,9 +27,10 @@ export class LessonService {
     return this.http.delete(environment.apiUrl + '/lessons/' + id);
   }
 
-  findAllSection() {
-    return this.http.get(environment.apiUrl + '/lessons/sections');
+  findAllSubject() {
+    return this.http.get(environment.apiUrl + '/lessons/subjects');
   }
+
   scraping(categoryId: string) {
     return this.http.post(environment.apiUrl + '/lessons/scraping', {categoryId});
   }

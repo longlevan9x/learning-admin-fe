@@ -12,16 +12,23 @@ import {
   StopOutline,
   MinusOutline,
   CaretDownFill,
-  ArrowRightOutline
+  ArrowRightOutline,
+  MoreOutline
 } from '@ant-design/icons-angular/icons';
 
-const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline, DeleteOutline,
+const icons = [
+  MenuFoldOutline,
+  MenuUnfoldOutline,
+  DashboardOutline,
+  FormOutline,
+  DeleteOutline,
   EditOutline,
   CaretRightFill,
   StopOutline,
   MinusOutline,
   CaretDownFill,
-  ArrowRightOutline
+  ArrowRightOutline,
+  MoreOutline
 ];
 
 @NgModule({

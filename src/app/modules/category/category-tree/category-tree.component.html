@@ -30,7 +30,9 @@
         <i nz-icon nzType="edit" class="mr-2"></i> Chỉnh sửa
       </button>
       <button class="flex items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4"
-              (click)="remove(category._id)">
+              nz-popconfirm
+              nzPopconfirmTitle="Are you sure delete this category?"
+              (nzOnConfirm)="remove(category._id)">
         <i nz-icon nzType="delete" class="mr-2"></i>
         Xóa
       </button>

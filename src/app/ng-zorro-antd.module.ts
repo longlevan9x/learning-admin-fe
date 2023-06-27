@@ -10,6 +10,7 @@ import {NzTreeSelectModule} from "ng-zorro-antd/tree-select";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzDropDownModule} from "ng-zorro-antd/dropdown";
 import {NzPopoverModule} from "ng-zorro-antd/popover";
+import {NzMessageModule} from "ng-zorro-antd/message";
 
 @NgModule({
   exports: [
@@ -23,7 +24,8 @@ import {NzPopoverModule} from "ng-zorro-antd/popover";
     NzTreeSelectModule,
     NzButtonModule,
     NzDropDownModule,
-    NzPopoverModule
+    NzPopoverModule,
+    NzMessageModule
   ],
 })
 export class NgZorroAntdModule {}

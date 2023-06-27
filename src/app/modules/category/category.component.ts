@@ -5,6 +5,7 @@ import {CategoryModel} from "../../models/category.model";
 import {CategoryService} from "../../services/category.service";
 import {LessonService} from "../../services/lesson.service";
 import {UtilsShared} from "../../shareds/utils.shared";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-category',
@@ -18,7 +19,9 @@ export class CategoryComponent implements OnInit {
   constructor(
     private modalService: NzModalService,
     private utilsShared: UtilsShared,
-              private categoryService: CategoryService, private lessonService: LessonService) {
+    private categoryService: CategoryService,
+    private lessonService: LessonService,
+    private nzMessageService: NzMessageService) {
   }
 
   openModal(category?: any): void {
@@ -59,19 +62,4 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  remove(id: string) {
-    this.categoryService.remove(id).subscribe(result => {
-      this.fetchList();
-    });
-  }
-
-  getCategoryParent(id?: string) {
-    return this.categories.find(c => c._id === id);
-  }
-
-  cloneLesson(categoryId: string) {
-    this.lessonService.scraping(categoryId).subscribe(result => {
-      console.log(result);
-    });
-  }
 }

@@ -12,6 +12,8 @@ import {UtilsShared} from "../../shareds/utils.shared";
 import {GrammarService} from "../../services/grammar.service";
 import {KanjiService} from "../../services/kanji.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {observable, Observable} from "rxjs";
 
 @Component({
   selector: 'app-lesson',
@@ -44,7 +46,8 @@ export class LessonComponent implements OnInit {
     private grammarService: GrammarService,
     private utilsShared: UtilsShared,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private nzMessageService: NzMessageService
   ) {
   }
 
@@ -85,9 +88,17 @@ export class LessonComponent implements OnInit {
   }
 
   remove(id?: string) {
-    this.lessonService.remove(id).subscribe(result => {
-      console.log(result);
-      this.fetchList();
+    this.lessonService.remove(id).subscribe({
+      next: (value: any) => {
+        this.nzMessageService.success('success');
+      },
+      error: (err: any) => {
+        this.nzMessageService.error(err.message);
+      },
+      complete: () => {
+        console.log('done');
+        this.fetchList();
+      }
     });
   }
 
@@ -126,23 +137,30 @@ export class LessonComponent implements OnInit {
     return this.categories.find(c => c._id === id);
   }
 
+  private _toastMessage() {
+    return {
+      next: (value: any) => {
+        this.nzMessageService.success('success');
+      },
+      error: (err: any) => {
+        this.nzMessageService.error(err.message);
+      },
+      complete: () => {
+        console.log('done');
+      }
+    };
+  }
+
   scrapingVocabulary(lessonId?: string, categoryId?: string, lessonCloneUrl?: string) {
-    this.vocabularyService.scraping(lessonId, categoryId, lessonCloneUrl).subscribe(result => {
-      console.log(result);
-    });
+    this.vocabularyService.scraping(lessonId, categoryId, lessonCloneUrl).subscribe(this._toastMessage());
   }
 
   scrapingKanji(lessonId?: string, categoryId?: string, lessonCloneUrl?: string) {
-    this.kanjiService.scraping(lessonId, categoryId, lessonCloneUrl)
-      .subscribe(result => {
-        console.log(result);
-      });
+    this.kanjiService.scraping(lessonId, categoryId, lessonCloneUrl).subscribe(this._toastMessage());
   }
 
   scrapingGrammar(lessonId?: string, lessonCloneUrl?: string) {
-    this.grammarService.scraping(lessonId, lessonCloneUrl).subscribe(result => {
-      console.log(result);
-    });
+    this.grammarService.scraping(lessonId, lessonCloneUrl).subscribe(this._toastMessage());
   }
 
   scrapingSubject(lessonId?: string, lessonCloneUrl?: string, subject?: string) {

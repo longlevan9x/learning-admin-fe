@@ -12,6 +12,8 @@ import {NzDropDownModule} from "ng-zorro-antd/dropdown";
 import {NzPopoverModule} from "ng-zorro-antd/popover";
 import {NzMessageModule} from "ng-zorro-antd/message";
 import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
+import {NzListModule} from "ng-zorro-antd/list";
+import {NzTypographyModule} from "ng-zorro-antd/typography";
 
 @NgModule({
   exports: [
@@ -27,7 +29,9 @@ import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
     NzDropDownModule,
     NzPopoverModule,
     NzMessageModule,
-    NzPopconfirmModule
+    NzPopconfirmModule,
+    NzListModule,
+    NzTypographyModule
   ],
 })
 export class NgZorroAntdModule {}

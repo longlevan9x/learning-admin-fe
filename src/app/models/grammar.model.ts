@@ -1,10 +1,13 @@
 export interface GrammarModel {
   _id?: string;
-  name?: string;
+  title?: string;
   bookId?: string;
   structure?: string;
   explain?: string;
   mean?: string;
-  examples?: string[];
+  examples?: { wordRaw: string, wordTranslate: string}[];
   cloneUrl?: string;
+
+  //virtual
+  expand?: boolean | any
 }

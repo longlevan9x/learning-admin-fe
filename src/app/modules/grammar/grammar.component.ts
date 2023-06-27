@@ -6,6 +6,7 @@ import {CategoryService} from "../../services/category.service";
 import {UtilsShared} from "../../shareds/utils.shared";
 import {GrammarService} from "../../services/grammar.service";
 import {GrammarModel} from "../../models/grammar.model";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-grammar',
@@ -23,13 +24,26 @@ export class GrammarComponent implements OnInit {
     private grammarService: GrammarService,
     private lessonService: LessonService,
     private categoryService: CategoryService,
-    private utilsShared: UtilsShared
+    private utilsShared: UtilsShared,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
-    this.fetchList();
     this.fetchListCategory();
+    this.fetchListCategory();
+    this.route.queryParams.subscribe((params: any) => {
+      if (params.cateId) {
+        this.filter.categoryId = params.cateId;
+        this.fetchListLesson();
+      }
+
+      if (params.lessonId) {
+        this.filter.lessonId = params.lessonId;
+      }
+
+      this.fetchList();
+    });
   }
 
   fetchList() {

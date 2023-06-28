@@ -14,6 +14,7 @@ import {KanjiService} from "../../services/kanji.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {observable, Observable} from "rxjs";
+import {ConversationService} from "../../services/conversation.service";
 
 @Component({
   selector: 'app-lesson',
@@ -30,10 +31,14 @@ export class LessonComponent implements OnInit {
   SUBJECTS = {
     VOCABULARY: 'VOCABULARY',
     GRAMMAR: 'GRAMMAR',
-    READING_PRACTICE: 'READING_PRACTICE',
     KANJI: 'KANJI',
     LISTENING: 'LISTENING',
     READING: 'READING',
+    READING_PRACTICE: 'READING_PRACTICE',
+    CONVERSATION: 'CONVERSATION',
+    EXERCISE: 'EXERCISE',
+    EXAMINATION: 'EXAMINATION',
+    REFERENCE: 'REFERENCE',
   };
 
   constructor(
@@ -44,6 +49,7 @@ export class LessonComponent implements OnInit {
     private vocabularyService: VocabularyService,
     private kanjiService: KanjiService,
     private grammarService: GrammarService,
+    private conversationService: ConversationService,
     private utilsShared: UtilsShared,
     private route: ActivatedRoute,
     private router: Router,
@@ -162,6 +168,9 @@ export class LessonComponent implements OnInit {
   scrapingGrammar(lessonId?: string, lessonCloneUrl?: string) {
     this.grammarService.scraping(lessonId, lessonCloneUrl).subscribe(this._toastMessage());
   }
+  scrapingConversation(lessonId?: string, lessonCloneUrl?: string) {
+    this.conversationService.scraping(lessonId, lessonCloneUrl).subscribe(this._toastMessage());
+  }
 
   scrapingSubject(lessonId?: string, lessonCloneUrl?: string, subject?: string) {
     if (subject === this.SUBJECTS.VOCABULARY) {
@@ -170,6 +179,8 @@ export class LessonComponent implements OnInit {
       this.scrapingGrammar(lessonId, lessonCloneUrl);
     } else if (subject === this.SUBJECTS.KANJI) {
       this.scrapingKanji(lessonId, '', lessonCloneUrl);
+    }else if (subject === this.SUBJECTS.CONVERSATION) {
+      this.scrapingConversation(lessonId,  lessonCloneUrl);
     }
   }
 
@@ -178,6 +189,7 @@ export class LessonComponent implements OnInit {
       [this.SUBJECTS.VOCABULARY]: '/vocabularies',
       [this.SUBJECTS.KANJI]: '/kanjis',
       [this.SUBJECTS.GRAMMAR]: '/grammars',
+      [this.SUBJECTS.CONVERSATION]: '/conversations',
     }
 
     this.router.navigate([urls[subject || '']], {

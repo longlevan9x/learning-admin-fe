@@ -36,14 +36,32 @@
   </tr>
   </thead>
   <tbody class="bg-white divide-y divide-gray-200">
-  <tr *ngFor="let lesson of lessons;let i = index" class="hover:bg-purple-300 hover:bg-opacity-20 odd:bg-emerald-500 odd:bg-opacity-10">
+  <tr *ngFor="let lesson of lessons;let i = index"
+      class="hover:bg-purple-300 hover:bg-opacity-20 odd:bg-emerald-500 odd:bg-opacity-10">
     <td class="px-6 py-4 whitespace-nowrap">{{i + 1}}</td>
     <td class="px-6 py-4 whitespace-nowrap">{{lesson.name}}</td>
     <td class="px-6 py-4 whitespace-nowrap" *ngIf="false">
       {{getBook(lesson.bookId)?.name}}
     </td>
     <td class="px-6 py-4 whitespace-nowrap">{{getCategory(lesson.categoryId)?.name}}</td>
-    <td class="px-6 py-4 whitespace-nowrap">{{lesson.subjects?.toString()}}</td>
+    <td class="px-6 py-4">
+      <nz-tag [nzColor]="'magenta'"
+              class="mb-1 cursor-pointer"
+              *ngFor="let subject of lesson.subjects"
+              nz-popover [nzPopoverContent]="nzPopoverContentTemplate">
+        <ng-template #nzPopoverContentTemplate>
+          <button class="flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 mb-1"
+                  (click)="scrapingSubject(lesson._id, lesson.cloneUrl, subject)">
+            <i nz-icon nzType="download" class="mr-2"></i> Get
+          </button>
+          <button class="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 mb-1"
+                  (click)="gotoDetailSubject(lesson.categoryId, lesson._id, subject)">
+            <i nz-icon nzType="arrow-right" class="mr-2"></i> Goto
+          </button>
+        </ng-template>
+        {{subject}}
+      </nz-tag>
+    </td>
     <td class="px-6 py-4 whitespace-nowrap" *ngIf="false">
       <a [href]="'https://www.vnjpclub.com' + lesson.cloneUrl"
          target="_blank">{{'https://www.vnjpclub.com' + lesson.cloneUrl}}</a>
@@ -61,6 +79,7 @@
         Xóa
       </button>
       <button
+        *ngIf="false"
         class="flex border items-center font-bold py-2 px-4 ml-1"
         nz-popover [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottom">
         <span nz-icon nzType="more"></span>

@@ -13,7 +13,8 @@ import {
   MinusOutline,
   CaretDownFill,
   ArrowRightOutline,
-  MoreOutline
+  MoreOutline,
+  DownloadOutline
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -28,7 +29,8 @@ const icons = [
   MinusOutline,
   CaretDownFill,
   ArrowRightOutline,
-  MoreOutline
+  MoreOutline,
+  DownloadOutline
 ];
 
 @NgModule({

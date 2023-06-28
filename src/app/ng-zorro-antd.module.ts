@@ -14,6 +14,7 @@ import {NzMessageModule} from "ng-zorro-antd/message";
 import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
 import {NzListModule} from "ng-zorro-antd/list";
 import {NzTypographyModule} from "ng-zorro-antd/typography";
+import {NzTagModule} from "ng-zorro-antd/tag";
 
 @NgModule({
   exports: [
@@ -31,7 +32,8 @@ import {NzTypographyModule} from "ng-zorro-antd/typography";
     NzMessageModule,
     NzPopconfirmModule,
     NzListModule,
-    NzTypographyModule
+    NzTypographyModule,
+    NzTagModule
   ],
 })
 export class NgZorroAntdModule {}

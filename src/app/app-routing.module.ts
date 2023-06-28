@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'vocabularies', loadChildren: () => import('./modules/vocabulary/vocabulary.module').then(m => m.VocabularyModule) },
   { path: 'grammars', loadChildren: () => import('./modules/grammar/grammar.module').then(m => m.GrammarModule) },
   { path: 'kanjis', loadChildren: () => import('./modules/kanji/kanji.module').then(m => m.KanjiModule) },
+  { path: 'conversations', loadChildren: () => import('./modules/conversation/conversation.module').then(m => m.ConversationModule) },
 ];
 
 @NgModule({
